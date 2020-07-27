@@ -1,0 +1,34 @@
+﻿@model WebApplication4.Models.SubjectEvaluation
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>SubjectEvaluation</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Evaluation.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Evaluation.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Subject.ID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Subject.ID)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

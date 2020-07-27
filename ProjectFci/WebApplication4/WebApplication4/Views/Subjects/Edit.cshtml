@@ -1,0 +1,163 @@
+﻿@model WebApplication4.Models.Subject
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<div class="row">
+    <div class="col-lg-6">
+        <section class="widget">
+            <header>
+
+                <div class="widget-controls">
+
+                    <a href="#" data-widgster="close"><i class="glyphicon glyphicon-remove"></i></a>
+                </div>
+            </header>
+            <div class="widget-body" style="direction: rtl">
+
+
+                @using (Html.BeginForm("Edit", "Subjects", FormMethod.Post))
+                {
+
+                    @Html.AntiForgeryToken()
+
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <legend><strong> ادخال مادة </strong></legend>
+                    @* كود  الماده *@
+                    <div class="form-group row">
+
+                        <div class="col-md-7">
+
+                            @Html.EditorFor(model => model.SubjectCode, new { htmlAttributes = new { @class = "form-control", id = "normal-field" } })
+                            @Html.ValidationMessageFor(model => model.SubjectCode, "", new { @class = "text-danger" })
+
+                        </div>
+                        @Html.Label("كود المادة", htmlAttributes: new { @class = "col-md-4 form-control-label text-md-right" })
+
+                    </div>
+
+                    //اسم الماده
+                    <div class="form-group row">
+
+                        <div class="col-md-7">
+                            @Html.EditorFor(model => model.SubjectName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.SubjectName, "", new { @class = "text-danger" })
+
+                        </div>
+
+                        @Html.Label("اسم المادة", htmlAttributes: new { @class = "col-md-4 control-label text-md-right" })
+
+                    </div>
+
+
+                    //وصف الماده
+                    <div class="form-group row">
+
+                        <div class="col-md-7">
+                            @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+
+                        </div>
+
+                        @Html.Label(" وصف المادة", htmlAttributes: new { @class = "col-md-4 control-label text-md-right" })
+
+                    </div>
+                    //رقم الفرقه
+                    <div class="form-group row">
+
+                        <div class="col-md-7">
+                            @Html.EditorFor(model => model.PatchId, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.PatchId, "", new { @class = "text-danger" })
+
+                        </div>
+
+                        @Html.Label(" رقم الفرقة", htmlAttributes: new { @class = "col-md-4 control-label text-md-right" })
+
+                    </div>
+                    //الترم
+                    <div class="form-group row">
+
+                        <div class="col-md-7">
+                            @Html.EditorFor(model => model.Semester, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Semester, "", new { @class = "text-danger" })
+
+                        </div>
+
+                        @Html.Label(" الترم", htmlAttributes: new { @class = "col-md-4 control-label text-md-right" })
+
+                    </div>
+                    <div style="direction: ltr;" class="form-actions">
+                        <div class="row">
+                            <div class="col-md-offset-4 col-md-7">
+
+                                <button type="button" class="btn btn-inverse">الغاء</button>
+
+                                <button type="submit" class="btn btn-primary">حفظ </button>
+                            </div>
+                        </div>
+                    </div>
+
+
+                }
+            </div>
+        </section>
+    </div>
+    <!--finish student individual-->
+    <!-------------------------------------------------------->
+    <!--student by excell sheet-->
+    <div class="col-lg-6">
+
+
+        @* حتي الان لم يتم التفيذ *@
+
+        <section style="direction: rtl;" class="widget">
+            <div style="direction: ltr" class="widget-controls">
+
+                <a href="#" data-widgster="close"><i class="glyphicon glyphicon-remove"></i></a>
+            </div>
+            <div style="margin-top: 3%;" class="widget-body">
+                <legend><strong>رفع جميع الطلاب</strong></legend>
+
+                <form role="form">
+                    <fieldset>
+                        <blockquote class="blockquote-reverse">
+                            <p style="direction: rtl"> يمكنك رفع جميع الطلاب عن طريق Excell sheet مطابق للمواصفات</p>
+                            <footer style="direction: rtl">ملف Excell</footer>
+                        </blockquote>
+                        <div style="direction:ltr ;position: relative;
+
+                                left: 100px;" class="form-group row">
+
+                            <div class="col-md-8">
+                                <div class="fileinput fileinput-new input-group" data-provides="fileinput">
+                                    <div class="form-control" data-trigger="fileinput">
+                                        <i class="glyphicon glyphicon-file fileinput-exists"></i>
+                                        <span class="fileinput-filename"></span>
+                                    </div>
+                                    <span class="input-group-addon btn btn-secondary btn-file">
+                                        <span class="fileinput-new">اختار ملف</span>
+                                        <span class="fileinput-exists">?????</span>
+                                        <input id="fileupload1" type="file">
+                                    </span>
+                                    <a href="#" class="input-group-addon btn btn-secondary fileinput-exists" data-dismiss="fileinput">?????</a>
+
+                                </div>
+
+                    </fieldset>
+                    <div style="direction: ltr;" class="form-actions">
+                        <div class="row">
+                            <div class="col-md-offset-4 col-md-7">
+
+                                <button type="button" class="btn btn-inverse">الغاء</button>
+                                <button type="submit" class="btn btn-primary">حفظ </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </div>
+</div>

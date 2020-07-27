@@ -1,0 +1,134 @@
+﻿@model WebApplication4.Models.section
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+
+
+<div class="row">
+
+    <!-------------------------------------------------------->
+    <!--sections by excell sheet-->
+    @* not impemented enter by excell sheet *@
+    <div class="col-lg-6">
+
+
+
+
+        <section style="direction: rtl;" class="widget">
+            <div style="direction: ltr" class="widget-controls">
+
+                <a href="#" data-widgster="close"><i class="glyphicon glyphicon-remove"></i></a>
+            </div>
+            <div style="margin-top: 3%;" class="widget-body">
+                <legend><strong>رفع جميع الشعب</strong></legend>
+
+                <form role="form">
+                    <fieldset>
+                        <blockquote class="blockquote-reverse">
+                            <p style="direction: rtl">يمكنك  رفع جميع الشعب عن  طريق Excell sheet مطابق للمواصفات </p>
+                            <footer style="direction: rtl">ملف Excell</footer>
+                        </blockquote>
+                        <div style="direction:ltr ;position: relative;
+
+                                left: 100px;" class="form-group row">
+
+                            <div class="col-md-8">
+                                <div class="fileinput fileinput-new input-group" data-provides="fileinput">
+                                    <div class="form-control" data-trigger="fileinput">
+                                        <i class="glyphicon glyphicon-file fileinput-exists"></i>
+                                        <span class="fileinput-filename"></span>
+                                    </div>
+                                    <span class="input-group-addon btn btn-secondary btn-file">
+                                        <span class="fileinput-new">اختار الملف</span>
+                                        <span class="fileinput-exists">تغيير</span>
+                                        <input id="fileupload1" type="file">
+                                    </span>
+                                    <a href="#" class="input-group-addon btn btn-secondary fileinput-exists" data-dismiss="fileinput">ازاله</a>
+
+                                </div>
+
+                    </fieldset>
+                    <div style="direction: ltr;" class="form-actions">
+                        <div class="row">
+                            <div class="col-md-offset-4 col-md-7">
+
+                                <button type="button" class="btn btn-inverse">الفاء</button>
+                                <button type="submit" class="btn btn-primary">حفظ </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </div>
+    <div class="col-lg-6">
+        <section class="widget">
+
+
+            @using (Html.BeginForm("Create", "sections", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                <header>
+
+                    <div class="widget-controls">
+
+                        <a href="#" data-widgster="close"><i class="glyphicon glyphicon-remove"></i></a>
+                    </div>
+                </header>
+                <div class="widget-body" style="direction: rtl;margin-top:3%;">
+                    <fieldset>
+                        <legend><strong>اضافه شعبه </strong></legend>
+
+                    </fieldset>
+
+
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @* الاسم *@
+                    <div class="form-group row">
+
+                        <div class="col-md-7">
+                            @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control", id = "normal-field" } })
+                            @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
+                        </div>
+                        <label for="normal-field" class="col-md-4 form-control-label text-md-right">اسم الشعبه</label>
+                    </div>
+
+                    @* الوصف *@
+                    <div class="form-group row">
+
+                        <div class="col-md-7">
+                            <textarea type="text" name="description"
+                                      class="form-control"
+                                      style="direction: rtl"></textarea>
+                            @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
+                        </div>
+                        <label class="col-md-4 control-label text-md-right" for="max-length">الوصف</label>
+                    </div>
+
+
+
+
+
+                    @* الحفظ والالغاء *@
+                    <div style="direction: ltr;" class="form-actions">
+                        <div class="row">
+                            <div class="col-md-offset-4 col-md-7">
+
+                                <button type="button" class="btn btn-inverse">الفاء</button>
+                                <button type="submit" class="btn btn-primary">حفظ </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </section>
+    </div>
+    <!--finish sections individual-->
+</div>
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

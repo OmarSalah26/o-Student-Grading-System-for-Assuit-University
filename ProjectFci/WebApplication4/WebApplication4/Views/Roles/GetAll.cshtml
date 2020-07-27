@@ -1,0 +1,73 @@
+﻿@model IEnumerable<Microsoft.AspNet.Identity.EntityFramework.IdentityRole>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h1 style="text-align:right" class="page-title">عرض جميع - <span style="text-align:right" class="fw-semi-bold">انواع المستخدمين</span></h1>
+
+
+
+
+<section class="widget">
+    <header>
+
+        <div class="widget-controls">
+            <a data-widgster="expand" title="Expand" href="#"><i class="glyphicon glyphicon-chevron-up"></i></a>
+            <a data-widgster="collapse" title="Collapse" href="#"><i class="glyphicon glyphicon-chevron-down"></i></a>
+            <a data-widgster="close" title="Close" href="#"><i class="glyphicon glyphicon-remove"></i></a>
+        </div>
+    </header>
+    <div class="widget-body">
+
+        <div class="mt">
+            <table id="datatable-table" class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th style="text-align:right">رقم النوع  </th>
+                        <th style="text-align:right">اسم النوع</th>
+
+
+
+
+
+                    </tr>
+                </thead>
+                <tbody>
+
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+
+                            <td><span class="fw-semi-bold">@item.Id</span></td>
+                            <td class="hidden-sm-down">
+                                <small>
+                                    <span class="fw-semi-bold"></span>
+                                    &nbsp; JPEG
+                                </small>
+                                <br>
+                                <small>
+                                    <span class="fw-semi-bold">@item.Name</span>
+                                    &nbsp; 200x150
+                                </small>
+                            </td>
+                           
+
+
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                            </td>
+                        </tr>
+
+
+
+
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    </sectio

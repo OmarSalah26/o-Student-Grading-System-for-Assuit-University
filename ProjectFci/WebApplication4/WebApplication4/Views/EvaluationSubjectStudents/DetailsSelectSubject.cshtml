@@ -1,0 +1,71 @@
+﻿@model IEnumerable<WebApplication4.Dto.SubjectDto>
+
+
+
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-1">
+            <section class="widget">
+
+
+                @using (Html.BeginForm("Details", "EvaluationSubjectStudents", FormMethod.Get))
+                {
+                    @Html.AntiForgeryToken()
+                    <header>
+
+                        <div class="widget-controls">
+
+                            <a href="#" data-widgster="close"><i class="glyphicon glyphicon-remove"></i></a>
+                        </div>
+                    </header>
+                    <div class="widget-body" style="direction: rtl;margin-top:3%;">
+                        <fieldset>
+                            <legend><strong>اختيار ماده </strong></legend>
+
+                        </fieldset>
+
+
+
+
+
+
+                        @*اختيار الماده*@
+                        <div class="form-group row">
+
+                            <div class="col-md-7">
+                                <select id="country-select"
+                                        data-placeholder="اختيار ماده"
+                                        class="selectpicker countrypicker form-control"
+                                        tabindex="-1"
+                                        name="id">
+                                    @foreach (var item in Model)
+                                    {
+                                        <option value="@item.SubjectCode">@item.SubjectName</option>
+                                    }
+                                </select>
+
+
+                            </div>
+                            <label class="col-md-4 control-label" for="country-select">الماده</label>
+                        </div>
+
+
+
+                        @*  البحث *@
+                        <div style="direction: ltr;" class="form-actions">
+                            <div class="row">
+                                <div class="col-md-offset-4 col-md-7">
+
+
+                                    <button type="submit" class="btn btn-primary">رصد </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </section>
+        </div>
+
+    </div>
+
+
+

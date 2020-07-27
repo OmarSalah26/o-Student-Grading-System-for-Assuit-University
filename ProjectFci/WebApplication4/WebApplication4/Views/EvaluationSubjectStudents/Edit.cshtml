@@ -1,0 +1,108 @@
+﻿@model WebApplication4.Dto.SubjectDto
+@using WebApplication4.Dto
+@using WebApplication4.Logic
+
+@{
+    EvaluationLogic evaluationLogic = new EvaluationLogic();
+    var evaluationDto = evaluationLogic.GetAll();
+
+    StudentLogic studentLogic = new StudentLogic();
+    var studentDtos = studentLogic.GetAll(Model.SubjectCode);
+    int numberOfEvaluationMethod = evaluationDto.Count();
+    int numberofStudents = studentDtos.Count();
+    EvaluationSubjectStudentLogic subjectStudentLogic = new EvaluationSubjectStudentLogic();
+    
+
+
+
+}
+
+
+<h1 class="page-title" style="text-align:right"> رصد درجات الطلاب <span style="text-align:right" class="fw-semi-bold">- @Model.SubjectName</span></h1>
+
+
+
+
+
+
+<section class="widget">
+    <header>
+
+        <div class="widget-controls">
+            <a data-widgster="expand" title="Expand" href="#"><i class="glyphicon glyphicon-chevron-up"></i></a>
+            <a data-widgster="collapse" title="Collapse" href="#"><i class="glyphicon glyphicon-chevron-down"></i></a>
+            <a data-widgster="close" title="Close" href="#"><i class="glyphicon glyphicon-remove"></i></a>
+        </div>
+    </header>
+    <div class="widget-body" style="direction:rtl">
+
+        @using (Html.BeginForm("Edit", "EvaluationSubjectStudents", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            <div class="mt">
+                <table id="myTable" class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th style="text-align:center">طالب</th>
+                            @foreach (var item in evaluationDto)
+                            {
+
+                                <th style="text-align:center"> <div class="col-md-4">@item.Description </div></th>
+                            }
+
+                            <th style="text-align:center" class="no-sort hidden-sm-down"><div class="col-md-3">مجموع </div></th>
+
+
+
+
+
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+
+
+                        @for (int student = 0; student < numberofStudents; student++)
+                        {
+
+
+                            <tr>
+
+                                <td><span class="fw-semi-bold">@studentDtos[student].Name</span></td>
+
+                                @for (int i = 0; i < numberOfEvaluationMethod; i++)
+                                {
+                                    <input type="hidden" name="Grades[@student][@i].SubjectCode" value="@Model.SubjectCode" />
+                                    <input type="hidden" name="Grades[@student][@i].StudentSeatingNumber" value="@studentDtos[student].SeatingNumber" />
+                                    <input type="hidden"  name="Grades[@student][@i].EvaluationID" value="@evaluationDto[i].id" />
+                                    <td>  <div class="col-md-4 combat"> <input value="@subjectStudentLogic.GetById(evaluationDto[i].id,Model.SubjectCode,@studentDtos[student].SeatingNumber).Grade" name="Grades[@student][@i].Grade" required type="text" id="degrees[@student][@i]" class="form-control" /> </div> </td>
+                                }
+
+                                <td> <div class="col-md-4 total-combat"> <input readonly type="text" id="Total[@student]" name="totalGrade" class="form-control" /> </div></td>
+                            </tr>
+
+
+
+
+
+                        }
+                    </tbody>
+
+
+                </table>
+                <div class="form-group">
+
+                    <input type="button" onclick="doAdd(this)" value="تجميع" class="btn btn-primary" />
+
+
+
+                    <input style="position: absolute;left: 20px;" type="submit" value="اعتماد" class="btn btn-info" />
+
+                </div>
+
+            </div>
+        }
+    </div>
+
+</section>

@@ -1,0 +1,271 @@
+﻿@model WebApplication4.Dto.StudentEnrollSubjectDto
+@using WebApplication4.Logic
+@using WebApplication4.Models
+@{
+    SubjectLogic subjectLogic = new SubjectLogic();
+
+    var subjectList = subjectLogic.GetAll();
+
+
+
+}
+
+
+<div class="row">
+
+    <!-------------------------------------------------------->
+    <!--student by excell sheet-->
+    @* not impemented enter by excell sheet *@
+    <div class="col-lg-6">
+
+
+
+
+        <section style="direction: rtl;" class="widget">
+            <div style="direction: ltr" class="widget-controls">
+
+                <a href="#" data-widgster="close"><i class="glyphicon glyphicon-remove"></i></a>
+            </div>
+            <div style="margin-top: 3%;" class="widget-body">
+                <legend><strong>وضع الطالب في الماده</strong></legend>
+
+                <form role="form">
+                    <fieldset>
+                        <blockquote class="blockquote-reverse">
+                            <p style="direction: rtl">يمكنك  رفع جميع الطلاب للمواد الخاصة بهم عن  طريق Excell sheet مطابق للمواصفات </p>
+                            <footer style="direction: rtl">ملف Excell</footer>
+                        </blockquote>
+                        <div style="direction:ltr ;position: relative;
+
+                                left: 100px;" class="form-group row">
+
+                            <div class="col-md-8">
+                                <div class="fileinput fileinput-new input-group" data-provides="fileinput">
+                                    <div class="form-control" data-trigger="fileinput">
+                                        <i class="glyphicon glyphicon-file fileinput-exists"></i>
+                                        <span class="fileinput-filename"></span>
+                                    </div>
+                                    <span class="input-group-addon btn btn-secondary btn-file">
+                                        <span class="fileinput-new">اختار الملف</span>
+                                        <span class="fileinput-exists">تغيير</span>
+                                        <input id="fileupload1" type="file">
+                                    </span>
+                                    <a href="#" class="input-group-addon btn btn-secondary fileinput-exists" data-dismiss="fileinput">ازاله</a>
+
+                                </div>
+
+                    </fieldset>
+                    <div style="direction: ltr;" class="form-actions">
+                        <div class="row">
+                            <div class="col-md-offset-4 col-md-7">
+
+                                <button type="button" class="btn btn-inverse">الفاء</button>
+                                <button type="submit" class="btn btn-primary">حفظ </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </div>
+    <div class="col-lg-6">
+        <section class="widget">
+
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                <header>
+
+                    <div class="widget-controls">
+
+                        <a href="#" data-widgster="close"><i class="glyphicon glyphicon-remove"></i></a>
+                    </div>
+                </header>
+                <div class="widget-body" style="direction: rtl;margin-top:3%;">
+                    <fieldset>
+                        <legend><strong>  تسجيل الطالب في مادة</strong></legend>
+
+                    </fieldset>
+
+
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @*كود الماده *@
+                    <div class="form-group row">
+
+                        <div class="col-md-7">
+                            <select name="subjectcode"
+                                    data-placeholder="اختارالمواد"
+                                    class="select2 form-control" id="multiple-select">
+
+                                @foreach (var item in subjectList)
+                                {
+                                    <option value="@item.SubjectCode"> @item.SubjectName</option>
+                                }
+
+
+                            </select>
+                            @Html.ValidationMessageFor(model => model.subjectcode, "", new { @class = "text-danger" })
+                        </div>
+                        <label for="normal-field" class="col-md-4 form-control-label text-md-right"> كود المادة </label>
+                    </div>
+
+                    @* رقم الجلوس *@
+                    <div class="form-group row">
+
+                        <div class="col-md-7">
+                            <input type="text" id="max-length" maxlength="14" name="StudentSeatingNumber"
+                                   class="form-control"
+                                   style="direction: rtl">
+                            @Html.ValidationMessageFor(model => model.StudentSeatingNumber, "", new { @class = "text-danger" })
+                        </div>
+                        <label class="col-md-4 control-label text-md-right" for="max-length">  رقم الجلوس</label>
+                    </div>
+
+
+
+                    @* الر افه  *@
+                    @*<div class="form-group row">
+
+
+                            <div class="col-md-7">
+
+                                <input type="text" name="ClemencyDegreeID" id="max-length" maxlength="14"
+                                       class="form-control"
+                                       placeholder=" 1/1/1991">
+                                @Html.ValidationMessageFor(model => model.ClemencyDegreeID, "", new { @class = "text-danger" })
+                            </div>
+                            <label class="col-md-4 control-label text-md-right" for="prepended-input">الر افه</label>
+                        </div>*@
+
+                    @* تاريخ االتسجيل  *@
+                    @*<div class="form-group row">
+
+
+                            <div class="col-md-7">
+
+                                <input type="text" id="max-length" maxlength="14"
+                                       class="form-control"
+                                       placeholder=" 14 رقم"
+                                       name="DateTimeENL">
+                                @Html.ValidationMessageFor(model => model.DateTimeENL, "", new { @class = "text-danger" })
+                            </div>
+
+                            <label class="col-md-4 control-label text-md-right" for="prepended-input">* تاريخ االتسجيل </label>
+                        </div>*@
+
+
+
+                    @* تاريخ الرافة  *@
+                    @*<div class="form-group row">
+
+
+                            <div class="col-md-7">
+
+                                <input type="text" id="max-length" maxlength="14"
+                                       class="form-control"
+                                       placeholder=" 14 رقم"
+                                       name="DateTimeCLD">
+                                @Html.ValidationMessageFor(model => model.DateTimeCLD, "", new { @class = "text-danger" })
+                            </div>
+
+                            <label class="col-md-4 control-label text-md-right" for="prepended-input">تاريخ الرافة   </label>
+                        </div>*@
+
+
+
+                    @* الناتج النهائي  *@
+                    @*<div class="form-group row">
+
+
+                            <div class="col-md-7">
+
+                                <input type="text" id="max-length" maxlength="14"
+                                       class="form-control"
+                                       placeholder="95"
+                                       name="TotalGrade">
+                                @Html.ValidationMessageFor(model => model.TotalGrade, "", new { @class = "text-danger" })
+                            </div>
+
+                            <label class="col-md-4 control-label text-md-right" for="prepended-input"> الناتج النهائي  </label>
+                        </div>*@
+
+
+
+
+                    @* تقدير الناتج النهائي  *@
+                    @*<div class="form-group row">
+
+
+                            <div class="col-md-7">
+
+                                <input type="text" id="max-length" maxlength="14"
+                                       class="form-control"
+                                       placeholder="امتياز"
+                                       name="RateingForGrade">
+                                @Html.ValidationMessageFor(model => model.RateingForGrade, "", new { @class = "text-danger" })
+                            </div>
+
+                            <label class="col-md-4 control-label text-md-right" for="prepended-input">التقدير   </label>
+                        </div>*@
+
+
+                    @*StateStudentEnrollSubject*@
+
+                    <div class="form-group row">
+
+
+                        <div class="col-md-7">
+                            <select name="StateStudentEnrollSubject" class="form-control" placeholder="مستجد او باقي">
+                                <option value="مستجد"> مستجد</option>
+                                <option value="باقي"> باقي</option>
+
+                            </select>
+
+                            @Html.ValidationMessageFor(model => model.StateStudentEnrollSubject, "", new { @class = "text-danger" })
+                        </div>
+
+                        <label class="col-md-4 control-label text-md-right" for="prepended-input">* حالة الطالب بالنسبة للمادة    </label>
+                    </div>
+
+
+
+
+
+
+                    @* الحفظ والالغاء *@
+                    <div style="direction: ltr;" class="form-actions">
+                        <div class="row">
+                            <div class="col-md-offset-4 col-md-7">
+
+                                <button type="button" class="btn btn-inverse">الفاء</button>
+                                <button type="submit" class="btn btn-primary">حفظ </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </section>
+    </div>
+    <!--finish student individual-->
+</div>
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+
+    <!-- page specific libs -->
+    <script src=@Url.Content("/Content/FrontEnd/vendor/bootstrap/js/dist/modal.js")></script>
+    <script src=@Url.Content("/Content/FrontEnd/vendor/bootstrap-select/dist/js/bootstrap-select.min.js")></script>
+    <script src=@Url.Content("/Content/FrontEnd/vendor/jquery-autosize/jquery.autosize.min.js")></script>
+    <script src=@Url.Content("/Content/FrontEnd/vendor/bootstrap3-wysihtml5/src/bootstrap3-wysihtml5.js")></script>
+    <script src=@Url.Content("/Content/FrontEnd/vendor/select2/select2.min.js")></script>
+    <script src=@Url.Content("/Content/FrontEnd/vendor/switchery/dist/switchery.min.js")></script>
+    <script src=@Url.Content("/Content/FrontEnd/vendor/moment/min/moment.min.js")></script>
+
+
+    <script src=@Url.Content("/Content/FrontEnd/js/form-elements.js")></script>
+
+}

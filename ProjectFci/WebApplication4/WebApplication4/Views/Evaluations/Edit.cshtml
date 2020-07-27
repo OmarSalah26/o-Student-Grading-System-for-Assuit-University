@@ -1,0 +1,85 @@
+﻿@model WebApplication4.Models.Evaluation
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<div class="row">
+    <div class="col-lg-8 col-lg-offset-1">
+        <section class="widget">
+
+
+            @using (Html.BeginForm("Create", "Evaluations", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                <header>
+
+                    <div class="widget-controls">
+
+                        <a href="#" data-widgster="close"><i class="glyphicon glyphicon-remove"></i></a>
+                    </div>
+                </header>
+                <div class="widget-body" style="direction: rtl;margin-top:3%;">
+                    <fieldset>
+                        <legend><strong>اضافه تقييم </strong></legend>
+
+                    </fieldset>
+
+                    @* الوصف *@
+                    <div class="form-group row">
+
+                        <div class="col-md-7">
+                            <textarea type="text" name="Description"
+                                   class="form-control"
+                                   style="direction: rtl"></textarea>
+                            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                        </div>
+                        <label class="col-md-4 control-label text-md-right" for="max-length">الوصف</label>
+                    </div>
+
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @* الحد الاقصي *@
+                    <div class="form-group row">
+
+                        <div class="col-md-7">
+                            @Html.EditorFor(model => model.Max, new { htmlAttributes = new { @class = "form-control", id = "normal-field" } })
+                            @Html.ValidationMessageFor(model => model.Max, "", new { @class = "text-danger" })
+                        </div>
+                        <label for="normal-field" class="col-md-4 form-control-label text-md-right">الحد الاقصي</label>
+                    </div>
+                    @* الحد الادني *@
+                    <div class="form-group row">
+
+                        <div class="col-md-7">
+                            @Html.EditorFor(model => model.Min, new { htmlAttributes = new { @class = "form-control", id = "normal-field" } })
+                            @Html.ValidationMessageFor(model => model.Min, "", new { @class = "text-danger" })
+                        </div>
+                        <label for="normal-field" class="col-md-4 form-control-label text-md-right">الحد الادني</label>
+                    </div>
+
+
+
+
+
+
+                    @* الحفظ والالغاء *@
+                    <div style="direction: ltr;" class="form-actions">
+                        <div class="row">
+                            <div class="col-md-offset-4 col-md-7">
+
+                                <button type="button" class="btn btn-inverse">الفاء</button>
+                                <button type="submit" class="btn btn-primary">حفظ </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </section>
+    </div>
+
+</div>
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

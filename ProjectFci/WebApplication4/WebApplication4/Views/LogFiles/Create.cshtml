@@ -1,0 +1,211 @@
+﻿@*@model WebApplication4.Models.LogFile
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>LogFile</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.UserId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.UserId, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.UserId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Query, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Query, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Query, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DataTime, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DataTime, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DataTime, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+
+
+
+
+<ol class="breadcrumb">
+    <li>الرئسية</li>
+    <li class="active">مواد</li>
+</ol>
+
+ Student Form 
+<div class="row">
+    <div class="col-lg-8 col-lg-offset-1">
+        <section class="widget">
+            <header>
+
+                <div class="widget-controls">
+
+                    <a href="#" data-widgster="close"><i class="glyphicon glyphicon-remove"></i></a>
+                </div>
+            </header>
+            <div class="widget-body" style="direction: rtl">
+
+
+                @using (Html.BeginForm("Create", "LogFiles", FormMethod.Post))
+                {
+
+                    @Html.AntiForgeryToken()
+
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <legend><strong> ادخال مادة </strong></legend>
+                     كود  الماده 
+                    <div class="form-group row">
+
+                        <div class="col-md-7">
+
+                            @Html.EditorFor(model => model.id, new { htmlAttributes = new { @class = "form-control", id = "normal-field" } })
+                            @Html.ValidationMessageFor(model => model.id , "", new { @class = "text-danger" })
+
+                        </div>
+                        @Html.Label("كود ", htmlAttributes: new { @class = "col-md-4 form-control-label text-md-right" })
+
+                    </div>
+
+                    //اسم الماده
+                    <div class="form-group row">
+
+                        <div class="col-md-7">
+                            @Html.EditorFor(model => model.UserId, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.UserId, "", new { @class = "text-danger" })
+
+                        </div>
+
+                        @Html.Label("رقم المستخدم", htmlAttributes: new { @class = "col-md-4 control-label text-md-right" })
+
+                    </div>
+
+
+                    //وصف الماده
+                    <div class="form-group row">
+
+                        <div class="col-md-7">
+                            @Html.EditorFor(model => model.Query, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Query, "", new { @class = "text-danger" })
+
+                        </div>
+
+                        @Html.Label(" الحدث", htmlAttributes: new { @class = "col-md-4 control-label text-md-right" })
+
+                    </div>
+                    //رقم الفرقه
+                    <div class="form-group row">
+
+                        <div class="col-md-7">
+                            @Html.EditorFor(model => model.DataTime, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.DataTime, "", new { @class = "text-danger" })
+
+                        </div>
+
+                        @Html.Label("تاريخ الحدث", htmlAttributes: new { @class = "col-md-4 control-label text-md-right" })
+
+                    </div>
+                    //الترم
+                   
+                    <div style="direction: ltr;" class="form-actions">
+                        <div class="row">
+                            <div class="col-md-offset-4 col-md-7">
+
+                                <button type="button" class="btn btn-inverse">الغاء</button>
+
+                                <button type="submit" class="btn btn-primary">حفظ </button>
+                            </div>
+                        </div>
+                    </div>
+
+
+                }
+            </div>
+        </section>
+    </div>
+    finish student individual
+    ----------------------------------------------------
+    student by excell sheet
+    <div class="col-lg-6">
+
+
+
+
+        <section style="direction: rtl;" class="widget">
+            <div style="direction: ltr" class="widget-controls">
+
+                <a href="#" data-widgster="close"><i class="glyphicon glyphicon-remove"></i></a>
+            </div>
+            <div style="margin-top: 3%;" class="widget-body">
+                <legend><strong>رفع جميع الطلاب</strong></legend>
+
+                <form role="form">
+                    <fieldset>
+                        <blockquote class="blockquote-reverse">
+                            <p style="direction: rtl"> يمكنك رفع جميع الطلاب عن طريق Excell sheet مطابق للمواصفات</p>
+                            <footer style="direction: rtl">ملف Excell</footer>
+                        </blockquote>
+                        <div style="direction:ltr ;position: relative;
+
+                                left: 100px;" class="form-group row">
+
+                            <div class="col-md-8">
+                                <div class="fileinput fileinput-new input-group" data-provides="fileinput">
+                                    <div class="form-control" data-trigger="fileinput">
+                                        <i class="glyphicon glyphicon-file fileinput-exists"></i>
+                                        <span class="fileinput-filename"></span>
+                                    </div>
+                                    <span class="input-group-addon btn btn-secondary btn-file">
+                                        <span class="fileinput-new">اختار ملف</span>
+                                        <span class="fileinput-exists">?????</span>
+                                        <input id="fileupload1" type="file">
+                                    </span>
+                                    <a href="#" class="input-group-addon btn btn-secondary fileinput-exists" data-dismiss="fileinput">?????</a>
+
+                                </div>
+
+                    </fieldset>
+                    <div style="direction: ltr;" class="form-actions">
+                        <div class="row">
+                            <div class="col-md-offset-4 col-md-7">
+
+                                <button type="button" class="btn btn-inverse">الغاء</button>
+                                <button type="submit" class="btn btn-primary">حفظ </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </div>
+</div>*@
+
+

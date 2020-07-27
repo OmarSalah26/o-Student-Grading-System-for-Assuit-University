@@ -1,0 +1,183 @@
+﻿
+
+@using WebApplication4.Models
+@model LoginViewModel
+@{
+    ViewBag.Title = "Log in";
+
+    Layout = null;
+
+}
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>تسجيل الطلاب</title>
+
+
+    <link rel="stylesheet" href=@Url.Content("/Content/FrontEnd/css/application.min.css")>
+
+
+    <link rel="shortcut icon" href="img/favicon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+</head>
+<body>
+
+
+    <div >
+        <!-- main page content. the place to put widgets in. usually consists of .row > .col-lg-* > .widget.  -->
+        <main id="content" class="content" role="main">
+
+            <div class="container">
+                <main id="content" class="widget-login-container" role="main">
+                    <div class="row">
+                        <div class="col-xl-4 col-md-6 col-xs-10 col-xl-offset-4 col-md-offset-3 col-xs-offset-1">
+                            <h5 class="widget-login-logo animated fadeInUp">
+                                <i class="fa fa-circle text-gray"></i>
+                               SGS
+                                <i class="fa fa-circle text-warning"></i>
+                            </h5>
+                            <section class="widget widget-login animated fadeInUp">
+                                <header style="direction:rtl">
+                                    <h3>  تسجيل الدخول  </h3>
+                                </header>
+                                <div class="widget-body">
+
+                                    <p class="widget-login-info" style="direction:rtl">
+                                        اذ لم يكن لديك حساب فضلاً اضغط التسجيل
+
+                                    </p>
+
+                                    @using (Html.BeginForm())
+                                    {
+
+                                        @Html.AntiForgeryToken()
+
+                                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                                        <div class="form-group">
+                                            <div >
+                                                @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", placeholder = "اسم المستخدم " ,style="direction:rtl"})
+                                                @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="form-group">
+                                            <div >
+                                                @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "كلمة السر",style="direction:rtl"})
+                                                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                       
+                                        <div class="clearfix">
+                                            <div class="btn-toolbar pull-xs-right">
+
+
+                                                @Html.ActionLink("تسجيل حساب جديد ", "Register", null, htmlAttributes: new { @class = "btn btn-secondary btn-sm" })
+
+
+
+                                                <button type="submit" class="btn btn-inverse btn-sm">تسجيل الدخول </button>
+
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6 col-md-push-6">
+                                                <div class="clearfix">
+                                                    <div class="abc-checkbox widget-login-info pull-xs-right ml-n-lg">
+                                                        <input type="checkbox" id="checkbox1" value="1">
+                                                        <label for="checkbox1">ابقي الحساب متصلاً  </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+
+                                    }
+
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </main>
+                <footer class="page-footer" style="text-align:center">
+        ®<span>    حقوق النشر محفوظة لجامعة اسيوط</span>  @DateTime.Now.Year                </footer>
+            </div>
+            <!-- The Loader. Is shown when pjax happens -->
+            <div class="loader-wrap hiding hide">
+                <i class="fa fa-circle-o-notch fa-spin-fast"></i>
+            </div>
+
+        </main>
+    </div>
+    <!-- The Loader. Is shown when pjax happens -->
+    <div class="loader-wrap hiding hide">
+        <i class="fa fa-circle-o-notch fa-spin-fast"></i>
+    </div>
+
+
+
+
+
+
+
+
+
+    <!-- common libraries. required for every page-->
+    <script src=@Url.Content("/Content/FrontEnd/vendor/jquery/dist/jquery.min.js")></script>
+    <script src=@Url.Content("/Content/FrontEnd/vendor/jquery-pjax/jquery.pjax.js")></script>
+
+    <script src=@Url.Content("/Content/FrontEnd/vendor/tether/dist/js/tether.js")></script>
+
+    <script src=@Url.Content("/Content/FrontEnd/vendor/bootstrap/js/dist/util.js")></script>
+    <script src=@Url.Content("/Content/FrontEnd/vendor/bootstrap/js/dist/collapse.js")></script>
+    <script src=@Url.Content("/Content/FrontEnd/vendor/bootstrap/js/dist/dropdown.js")></script>
+
+    <script src=@Url.Content("/Content/FrontEnd/vendor/bootstrap/js/dist/button.js")></script>
+    <script src=@Url.Content("/Content/FrontEnd/vendor/bootstrap/js/dist/tooltip.js")></script>
+    <script src=@Url.Content("/Content/FrontEnd/vendor/bootstrap/js/dist/alert.js")></script>
+    <script src=@Url.Content("/Content/FrontEnd/vendor/slimScroll/jquery.slimscroll.js")></script>
+    <script src=@Url.Content("/Content/FrontEnd/vendor/widgster/widgster.js")></script>
+    <script src=@Url.Content("/Content/FrontEnd/vendor/pace.js/pace.js") data-pace-options='{ "target": ".content-wrap", "ghostTime": 1000 }'></script>
+    <script src=@Url.Content("/Content/FrontEnd/vendor/jquery-touchswipe/jquery.touchSwipe.js")></script>
+    <script src=@Url.Content("/Content/FrontEnd/js/bootstrap-fix/button.js")></script>
+
+
+    <script src=@Url.Content("/Content/FrontEnd/js/settings.js")></script>
+    <script src=@Url.Content("/Content/FrontEnd/js/app.js")></script>
+
+    <script id="test" src=@Url.Content("/Content/FrontEnd/vendor/underscore/underscore.js")></script>
+    <script src=@Url.Content("/Content/FrontEnd/vendor/jquery.sparkline/index.js")></script>
+    <script src=@Url.Content("/Content/FrontEnd/vendor/jquery.sparkline/index.js")></script>
+    <script src=@Url.Content("/Content/FrontEnd/vendor/d3/d3.min.js")></script>
+    <script src=@Url.Content("/Content/FrontEnd/vendor/rickshaw/rickshaw.min.js")></script>
+    <script src=@Url.Content("/Content/FrontEnd/vendor/raphael/raphael-min.js")></script>
+    <script src=@Url.Content("/Content/FrontEnd/vendor/jQuery-Mapael/js/jquery.mapael.js")></script>
+    <script src=@Url.Content("/Content/FrontEnd/vendor/jQuery-Mapael/js/maps/usa_states.js")></script>
+    <script src=@Url.Content("/Content/FrontEnd/vendor/jQuery-Mapael/js/maps/world_countries.js")></script>
+    <script src=@Url.Content("/Content/FrontEnd/vendor/bootstrap/js/dist/popover.js")></script>
+    <script src=@Url.Content("/Content/FrontEnd/vendor/bootstrap_calendar/bootstrap_calendar/js/bootstrap_calendar.min.js")></script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

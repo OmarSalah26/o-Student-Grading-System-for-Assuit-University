@@ -1,0 +1,272 @@
+﻿@model WebApplication4.Dto.SubjectDto
+@using WebApplication4.Dto
+@using WebApplication4.Logic
+
+@{
+
+    EvaluationLogic evaluationLogic = new EvaluationLogic();
+    var evaluationDto = evaluationLogic.GetAll();
+    RateLogic RateLogic = new RateLogic();
+    var RateDto = RateLogic.GetAll();
+    PatchLogic patchLogic = new PatchLogic();
+    var patches = patchLogic.GetAll();
+    ViewData["Rates"] = new MultiSelectList(RateDto);
+
+}
+
+
+
+<ol class="breadcrumb">
+    <li>الرئسية</li>
+    <li class="active">مواد</li>
+</ol>
+
+<!-- Student Form -->
+<div class="row">
+    <div class="col-lg-6">
+        <section style="direction: rtl;" class="widget">
+            <div style="direction: ltr" class="widget-controls">
+
+                <a href="#" data-widgster="close"><i class="glyphicon glyphicon-remove"></i></a>
+            </div>
+            <div style="margin-top: 3%;" class="widget-body">
+                <legend><strong>رفع جميع المواد</strong></legend>
+
+                <form role="form">
+                    <fieldset>
+                        <blockquote class="blockquote-reverse">
+                            <p style="direction: rtl"> يمكنك رفع جميع المواد عن طريق Excell sheet مطابق للمواصفات</p>
+                            <footer style="direction: rtl">ملف Excell</footer>
+                        </blockquote>
+                        <div style="direction:ltr ;position: relative;
+
+                                left: 100px;" class="form-group row">
+
+                            <div class="col-md-8">
+                                <div class="fileinput fileinput-new input-group" data-provides="fileinput">
+                                    <div class="form-control" data-trigger="fileinput">
+                                        <i class="glyphicon glyphicon-file fileinput-exists"></i>
+                                        <span class="fileinput-filename"></span>
+                                    </div>
+                                    <span class="input-group-addon btn btn-secondary btn-file">
+                                        <span class="fileinput-new">اختار ملف</span>
+                                        <span class="fileinput-exists">?????</span>
+                                        <input id="fileupload1" type="file">
+                                    </span>
+                                    <a href="#" class="input-group-addon btn btn-secondary fileinput-exists" data-dismiss="fileinput">?????</a>
+
+                                </div>
+
+                    </fieldset>
+                    <div style="direction: ltr;" class="form-actions">
+                        <div class="row">
+                            <div class="col-md-offset-4 col-md-7">
+
+                                <button type="button" class="btn btn-inverse">الغاء</button>
+                                <button type="submit" class="btn btn-primary">حفظ </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </section>
+    </div>
+    <div class="col-lg-6">
+        <section class="widget">
+            <header>
+
+                <div class="widget-controls">
+
+                    <a href="#" data-widgster="close"><i class="glyphicon glyphicon-remove"></i></a>
+                </div>
+            </header>
+            <div class="widget-body" style="direction: rtl">
+           
+
+                @using (Html.BeginForm("Create", "Subjects", FormMethod.Post))
+                {
+
+                    @Html.AntiForgeryToken()
+
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <legend><strong> ادخال مادة </strong></legend>
+                    @* كود  الماده *@
+                    <div class="form-group row">
+
+                        <div class="col-md-7">
+
+                            @Html.EditorFor(model => model.SubjectCode, new { htmlAttributes = new { @class = "form-control", id = "normal-field" } })
+                            @Html.ValidationMessageFor(model => model.SubjectCode, "", new { @class = "text-danger" })
+
+                        </div>
+                        @Html.Label("كود المادة", htmlAttributes: new { @class = "col-md-4 form-control-label text-md-right" })
+
+                    </div>
+
+                    //اسم الماده
+                    <div class="form-group row">
+
+                        <div class="col-md-7">
+                            @Html.EditorFor(model => model.SubjectName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.SubjectName, "", new { @class = "text-danger" })
+
+                        </div>
+
+                        @Html.Label("اسم المادة", htmlAttributes: new { @class = "col-md-4 form-control-label text-md-right" })
+
+                    </div>
+
+
+                    //وصف الماده
+                    <div class="form-group row">
+
+                        <div class="col-md-7">
+                            <textarea class="form-control" name="Description"> </textarea>
+                            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+
+                        </div>
+
+                        @Html.Label(" وصف المادة", htmlAttributes: new { @class = "col-md-4 control-label text-md-right" })
+
+                    </div>
+                    //رقم الفرقه
+
+
+
+
+
+
+
+
+                    <div class="form-group row">
+                        <div class="col-md-7">
+
+                            <select tabindex="-1"
+                                    name="PatchId"
+                                    class="select2 form-control">
+                                <option disabled> </option>
+                                @foreach (var item in patches)
+                                {
+
+                                    <option value="@item.ID">@item.PatchName</option>
+                                }
+
+                            </select>
+                            @Html.ValidationMessageFor(model => model.PatchId, "", new { @class = "text-danger" })
+
+                        </div>
+                        @Html.Label(" رقم الفرقة", htmlAttributes: new { @class = "col-md-4 control-label text-md-right" })
+                    </div>
+
+
+
+
+
+
+
+
+                    //الترم
+                    <div class="form-group row">
+
+
+                        <div class="col-md-7">
+
+                            <input type="radio" name="Semester" value="1" />
+
+                        </div>
+                        @Html.Label(" الترم الاول", htmlAttributes: new { @class = "col-md-4 control-label text-md-right" })
+
+                        <div class="col-md-7">
+
+                            <input type="radio" name="Semester" value="2" />
+
+                            @Html.ValidationMessageFor(model => model.Semester, "", new { @class = "text-danger" })
+
+                        </div>
+                        @Html.Label(" الترم الثاني", htmlAttributes: new { @class = "col-md-4 control-label text-md-right" })
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-7">
+
+
+                            <select multiple
+                                    data-placeholder="اختار التقييم"
+                                    data-minimum-results-for-search="10"
+                                    tabindex="-1"
+                                    name="Rates"
+                                    class="select2 form-control" id="multiple-select">
+                                <option disabled> </option>
+                                @foreach (var item in evaluationDto)
+                                {
+
+                                    <option value="@item.id">@item.Description</option>
+                                }
+
+                            </select>
+
+                        </div>
+                        @Html.Label("التقدير", htmlAttributes: new { @class = "col-md-4 control-label text-md-right" })
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-7">
+
+                            <select multiple
+                                    data-placeholder="اختار التقدير"
+                                    data-minimum-results-for-search="10"
+                                    tabindex="-1"
+                                    name="Evaluations"
+                                    class="select2 form-control" id="multiple-select">
+                                <option disabled> </option>
+                                @foreach (var item in RateDto)
+                                {
+
+                                    <option value="@item.id">@item.description</option>
+                                }
+
+                            </select>
+
+                        </div>
+                        @Html.Label("التقييم", htmlAttributes: new { @class = "col-md-4 control-label text-md-right" })
+                    </div>
+                    <div style="margin:50px"></div>
+                    <div style="direction: ltr;" class="form-actions">
+                        <div class="row">
+                            <div class="col-md-offset-4 col-md-7">
+
+                                <button type="button" class="btn btn-inverse">الغاء</button>
+
+                                <button type="submit" class="btn btn-primary">حفظ </button>
+                            </div>
+                        </div>
+                    </div>
+
+
+                }
+
+            </div>
+        </section>
+    </div>
+    <!--finish student individual-->
+    <!-------------------------------------------------------->
+    <!--student by excell sheet-->
+
+</div>
+
+@section Scripts {
+
+    <!-- page specific libs -->
+    <script src=@Url.Content("/Content/FrontEnd/vendor/bootstrap/js/dist/modal.js")></script>
+    <script src=@Url.Content("/Content/FrontEnd/vendor/bootstrap-select/dist/js/bootstrap-select.min.js")></script>
+    <script src=@Url.Content("/Content/FrontEnd/vendor/jquery-autosize/jquery.autosize.min.js")></script>
+    <script src=@Url.Content("/Content/FrontEnd/vendor/bootstrap3-wysihtml5/src/bootstrap3-wysihtml5.js")></script>
+    <script src=@Url.Content("/Content/FrontEnd/vendor/select2/select2.min.js")></script>
+    <script src=@Url.Content("/Content/FrontEnd/vendor/switchery/dist/switchery.min.js")></script>
+    <script src=@Url.Content("/Content/FrontEnd/vendor/moment/min/moment.min.js")></script>
+
+
+    <script src=@Url.Content("/Content/FrontEnd/js/form-elements.js")></script>
+
+}

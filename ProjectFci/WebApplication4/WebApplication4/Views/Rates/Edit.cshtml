@@ -1,0 +1,90 @@
+﻿@model WebApplication4.Models.Rate
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+
+
+
+
+
+<ol class="breadcrumb">
+    <li>الرئسية</li>
+    <li class="active">التقديرات</li>
+</ol>
+
+<!-- Student Form -->
+<div class="row">
+    <div class="col-lg-8 col-lg-offset-1">
+        <section class="widget">
+            <header>
+
+                <div class="widget-controls">
+
+                    <a href="#" data-widgster="close"><i class="glyphicon glyphicon-remove"></i></a>
+                </div>
+            </header>
+            <div class="widget-body" style="direction: rtl">
+
+
+                @using (Html.BeginForm("Edit", "Rates", FormMethod.Post))
+                {
+
+                    @Html.AntiForgeryToken()
+
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <legend><strong> تعديل تقدير </strong></legend>
+                    @* كود  التقدير *@
+                    <div class="form-group row">
+
+                        <div class="col-md-7">
+
+                            @Html.EditorFor(model => model.id, new { htmlAttributes = new { @class = "form-control", id = "normal-field" } })
+                            @Html.ValidationMessageFor(model => model.id, "", new { @class = "text-danger" })
+
+                        </div>
+                        @Html.Label("رقم التقدير ", htmlAttributes: new { @class = "col-md-4 form-control-label text-md-right" })
+
+                    </div>
+
+                    //وصف التقدير
+                    <div class="form-group row">
+
+                        <div class="col-md-7">
+                            <textarea name="description" class="form-control"></textarea>
+                            @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
+
+                        </div>
+
+                        @Html.Label("وصف التقدير", htmlAttributes: new { @class = "col-md-4 control-label text-md-right" })
+
+                    </div>
+
+
+
+
+                    <div style="direction: ltr;" class="form-actions">
+                        <div class="row">
+                            <div class="col-md-offset-4 col-md-7">
+
+                                <button type="button" class="btn btn-inverse">الغاء</button>
+
+                                <button type="submit" class="btn btn-primary">حفظ </button>
+                            </div>
+                        </div>
+                    </div>
+
+
+                }
+            </div>
+        </section>
+    </div>
+
+
+</div>
+
